@@ -2,8 +2,8 @@ abstract class Branch {
     String startNode;
     String endNode;
     Node[] node;
-    getVoltage(){}
-    getCurrent(){}
+    void getVoltage(){}
+    void getCurrent(){}
 }
 class Resistor extends Branch {
 
