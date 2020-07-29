@@ -1,12 +1,16 @@
 package Component;
 
+import Node.Node;
+
 public abstract class Branch {
     protected  String name;
-    Node node1;
-    Node node2;
+    protected Node node1;
+    protected  Node node2;
     protected double time;
-    protected  double voltage;
-    protected  double current;
+    protected   double voltage;
+    protected    double current;
+    protected    double current_p;
+    protected   double current_n;
     Branch (String name,Node node1,Node node2){
         this.name=name;
         this.node1=node1;
@@ -14,8 +18,29 @@ public abstract class Branch {
     }
     public abstract void setVoltage();
     public  abstract double getVoltage();
-    public abstract void setCurrent();
+
+    public abstract void setCurrent(double dt,double dv,double di);
+
+    public void setCurrent(double current) {
+        this.current = current;
+    }
+
     public abstract double getCurrent();
+    public abstract void setCurrent_p(double dt,double dv,double di);
+
+    public void setCurrent_p(double current_p) {
+        this.current_p = current_p;
+    }
+
+    public abstract double getCurrent_p();
+
+    public void setCurrent_n(double current_n) {
+        this.current_n = current_n;
+    }
+
+    public double getCurrent_n(){
+        return  current_n;
+    }
 
     public String getName() {
         return name;
@@ -27,5 +52,13 @@ public abstract class Branch {
 
     public Node getNode2() {
         return node2;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
+    public double getTime() {
+        return time;
     }
 }

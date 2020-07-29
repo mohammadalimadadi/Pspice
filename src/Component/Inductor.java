@@ -1,12 +1,14 @@
 package Component;
 
+import Node.Node;
+
 public class Inductor extends Branch {
     protected static int indcount=1;
     private double inductance;
     private double inductanceinv;
     private double voltageintegral;
     //constructor
-    protected Inductor(String name,Node node1,Node node2,double inductance) {
+    public Inductor(String name, Node node1, Node node2, double inductance) {
         super(name,node1,node2);
         this.inductance = inductance;
         this.inductanceinv=1/inductance;
@@ -35,14 +37,26 @@ public class Inductor extends Branch {
     public double getVoltage(){
         return voltage ;
     }
+
     @Override
-    public void setCurrent() {
-        CircuitAnalysis.setNodeVoltageintegral(node1.getnumber(),time);
-        CircuitAnalysis.setNodeVoltagederive(node2.getnumber(),time);
-        current= voltageintegral*inductanceinv;
+    public void setCurrent(double dt, double dv, double di) {
+        current+=(dt*((node1.getVoltage()-node2.getVoltage())))/inductance;
     }
+
     @Override
     public double getCurrent() {
         return current;
     }
+
+    @Override
+    public void setCurrent_p(double dt, double dv, double di) {
+        current_p+=(dt*(node1.getVoltage()-node2.getVoltage()))/inductance;
+    }
+
+    @Override
+    public double getCurrent_p() {
+        return current_p;
+    }
+
+
 }

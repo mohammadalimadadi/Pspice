@@ -1,5 +1,6 @@
+package matheMathics;
 import java.util.Scanner;
-import java.util.*;
+
 public class Cramer {
     double A[][];
     double B[];
